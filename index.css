@@ -1,0 +1,142 @@
+* {
+    box-sizing: border-box;
+    --pear-skin: #9DBE3C;
+    --pear-skin-bright: #b4d946;
+    --pear-flesh: #ece7c4;
+    --pear-seed: #622d11;
+    --pear-red: #a04218;
+    --font-size-large: 32px;
+    --font-size-small: 24px;
+}
+
+body {
+    font-family: 'Silkscreen', cursive;
+    font-size: var(--font-size-large);
+    margin: 160px 160px 0 160px;
+    color: var(--pear-seed);
+    background-color: var(--pear-flesh);
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+@media only screen and (min-width: 1080px) {
+    .main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+h1,
+h2 {
+    margin-bottom: 32px;
+}
+
+.section__inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.input {
+    width: 320px;
+    margin-bottom: 16px;
+    height: 160px;
+    font-size: var(--font-size-small);
+    background-color: var(--pear-seed);
+    border: none;
+    border-radius: 8px;
+    padding: 16px;
+    color: var(--pear-flesh);
+    font-family: 'Indie Flower', cursive;
+}
+
+.input::placeholder {
+    color: var(--pear-flesh);
+    opacity: 0.5;
+}
+
+label {
+    font-family: 'Indie Flower', cursive;
+}
+
+.header__pairs {
+    margin-bottom: 64px;
+}
+
+button {
+    font-family: 'Silkscreen', cursive;
+    font-size: var(--font-size-small);
+    padding: 16px;
+    color: var(--pear-skin);
+    background-color: transparent;
+    border: 4px solid var(--pear-skin);
+    border-radius: 8px;
+    transition: color 0.2s ease-in;
+    cursor: pointer;
+    width: 320px;
+}
+
+button:hover {
+    color: var(--pear-seed);
+    background-color: var(--pear-skin);
+}
+
+.section__pairs__cards {
+    display: flex;
+}
+
+.paircard {
+    font-size: var(--font-size-small);
+    width: 128px;
+    height: 128px;
+    margin-right: 32px;
+    margin-bottom: 32px;
+    position: relative;
+    display: inline-block;
+    font-family: 'Indie Flower', cursive;
+}
+
+.paircard--matched {
+    width: 128px;
+    height: 128px;
+    margin-top: 16px;
+    background-color: var(--pear-skin-bright);
+    border-radius: 50% 15% 50% 50%;
+    transform: rotate(10deg);
+    box-shadow: inset 16px 8px var(--pear-skin);
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.paircard--matched:after {
+    content: "";
+    width: 4px;
+    height: 8px;
+    background-color: var(--pear-seed);
+    box-shadow: 0px 4px 4px 0px var(--pear-seed);
+    position: absolute;
+    top: 0px;
+    left: 124px;
+    transform: rotate(45deg);
+}
+
+.paircard--unmatched {
+    color: var(--pear-red);
+    display: flex;
+    flex-direction: column;
+}
+
+.paircard--unmatched img {
+    object-fit: scale-down;
+    width: 128px;
+    height: 128px;
+    transform: rotate(45deg);
+    position: absolute;
+    z-index: -1;
+}

@@ -1,16 +1,27 @@
-module Pairs exposing (Pair, toPairs)
+module Pairs exposing (Pairing(..), fromString, toPairs)
 
 
-type alias Pair a =
-    ( a, a )
+type Pairing
+    = Pair String String
+    | Unmatched String
 
 
-toPair : a -> a -> Pair a
-toPair first second =
-    ( first, second )
-
-
-toPairs : List a -> List (Pair a)
+toPairs : List String -> List Pairing
 toPairs input =
-    List.partition (\v -> v remainderBy 2 == 0) input
-        |> (\x -> x)
+    case input of
+        [ a ] ->
+            [ Unmatched a ]
+
+        [ a, b ] ->
+            [ Pair a b ]
+
+        a :: b :: xs ->
+            List.append [ Pair a b ] (toPairs xs)
+
+        _ ->
+            []
+
+
+fromString : String -> List Pairing
+fromString =
+    String.split "\n" >> List.map String.trim >> List.filter (not << String.isEmpty) >> toPairs
