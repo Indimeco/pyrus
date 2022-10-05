@@ -7,12 +7,55 @@
     --pear-red: #a04218;
     --font-size-large: 32px;
     --font-size-small: 24px;
+    --hero-offset: 320px;
+    --font-family-important: 'Silkscreen', cursive;
+    --font-family-accent: 'Indie Flower', cursive;
+    --page-margin: 160px;
+}
+
+.hero {
+    object-fit: cover;
+    width: 100vw;
+    height: var(--hero-offset);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 4px;
+    background-color: var(--pear-seed);
+    width: 100vw;
+    text-align: right;
+}
+
+.footer a {
+    color: var(--pear-flesh);
+    font-size: var(--font-size-small);
+    font-family: var(--font-family-accent);
+    transition: color 0.3s ease-in;
+    margin: 0 calc(var(--page-margin) - 8px);
+    text-decoration: none;
+}
+
+.footer a:visited {
+    color: var(--pear-flesh);
+}
+
+.footer a:hover,
+.footer a:focus {
+    color: var(--pear-skin);
+    text-decoration: underline;
 }
 
 body {
-    font-family: 'Silkscreen', cursive;
+    font-family: var(--font-family-important);
     font-size: var(--font-size-large);
-    margin: 160px 160px 0 160px;
+    margin: var(--hero-offset) 160px 0 160px;
     color: var(--pear-seed);
     background-color: var(--pear-flesh);
 }
@@ -51,7 +94,7 @@ h2 {
     border-radius: 8px;
     padding: 16px;
     color: var(--pear-flesh);
-    font-family: 'Indie Flower', cursive;
+    font-family: var(--font-family-accent);
 }
 
 .input::placeholder {
@@ -59,8 +102,13 @@ h2 {
     opacity: 0.5;
 }
 
+.input:hover,
+.input:focus {
+    outline: 4px solid var(--pear-skin);
+}
+
 label {
-    font-family: 'Indie Flower', cursive;
+    font-family: var(--font-family-accent);
 }
 
 .header__pairs {
@@ -80,7 +128,8 @@ button {
     width: 320px;
 }
 
-button:hover {
+button:hover,
+button:focus {
     color: var(--pear-seed);
     background-color: var(--pear-skin);
 }
@@ -107,7 +156,7 @@ button:hover {
     background-color: var(--pear-skin-bright);
     border-radius: 50% 15% 50% 50%;
     transform: rotate(10deg);
-    box-shadow: inset 16px 8px var(--pear-skin);
+    box-shadow: inset -8px -16px var(--pear-skin);
     position: absolute;
     display: flex;
     align-items: center;

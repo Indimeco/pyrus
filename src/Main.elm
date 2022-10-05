@@ -1,8 +1,8 @@
 module Main exposing (Msg(..), main, update, view)
 
 import Browser
-import Html exposing (Html, button, div, h1, h2, img, label, section, span, text, textarea)
-import Html.Attributes exposing (class, placeholder, src)
+import Html exposing (Html, a, button, div, h1, h2, img, label, section, span, text, textarea)
+import Html.Attributes exposing (class, href, placeholder, src)
 import Html.Events exposing (onClick, onInput)
 import Pairs exposing (Pairing(..), fromString)
 
@@ -54,23 +54,28 @@ view model =
             else
                 "Generated Pairs"
     in
-    div [ class "main" ]
-        [ section [ class "section__inputs" ]
-            [ h1 [ class "title" ] [ text "Pair together!" ]
-            , label [] [ text "List things to pair" ]
-            , textarea [ onInput Input, class "input", placeholder "first\nsecond\nthird" ] []
-            , button [ onClick GeneratePairs, class "button__generate" ] [ text "Generate Pairs" ]
+    div []
+        [ img [ class "hero", src "pear_hero.jpg" ] []
+        , div
+            [ class "main" ]
+            [ section [ class "section__inputs" ]
+                [ h1 [ class "title" ] [ text "Pair together!" ]
+                , label [] [ text "List things to pair" ]
+                , textarea [ onInput Input, class "input", placeholder "first\nsecond\nthird" ] []
+                , button [ onClick GeneratePairs, class "button__generate" ] [ text "Generate Pairs" ]
+                ]
+            , section [ class "section__pairs" ]
+                [ h2 [ class "header__pairs" ]
+                    [ text headerText ]
+                , section
+                    [ class "section__pairs__cards" ]
+                    (List.map
+                        pairCard
+                        model.pairs
+                    )
+                ]
             ]
-        , section [ class "section__pairs" ]
-            [ h2 [ class "header__pairs" ]
-                [ text headerText ]
-            , section
-                [ class "section__pairs__cards" ]
-                (List.map
-                    pairCard
-                    model.pairs
-                )
-            ]
+        , div [ class "footer" ] [ a [ href "https://github.com/Indimeco/pyrus" ] [ text "Pluck the source code on github" ] ]
         ]
 
 
