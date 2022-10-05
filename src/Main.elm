@@ -7,6 +7,18 @@ import Html.Events exposing (onClick, onInput)
 import Pairs exposing (Pairing(..), fromString)
 
 
+type Msg
+    = Input String
+    | GeneratePairs
+
+
+type alias Model =
+    { input : String
+    , pairs : List Pairing
+    }
+
+
+main : Program () Model Msg
 main =
     Browser.sandbox
         { init =
@@ -18,11 +30,7 @@ main =
         }
 
 
-type Msg
-    = Input String
-    | GeneratePairs
-
-
+update : Msg -> Model -> Model
 update msg model =
     case msg of
         Input s ->
@@ -36,6 +44,7 @@ update msg model =
             }
 
 
+view : Model -> Html Msg
 view model =
     let
         headerText =
@@ -48,7 +57,7 @@ view model =
     div [ class "main" ]
         [ section [ class "section__inputs" ]
             [ h1 [ class "title" ] [ text "Pair together!" ]
-            , label [] [ text "Enter things to pair" ]
+            , label [] [ text "List things to pair" ]
             , textarea [ onInput Input, class "input", placeholder "first\nsecond\nthird" ] []
             , button [ onClick GeneratePairs, class "button__generate" ] [ text "Generate Pairs" ]
             ]
@@ -79,4 +88,4 @@ pairCardItem pair =
             div [ class "paircard--matched" ] [ text (one ++ " " ++ two) ]
 
         Unmatched one ->
-            div [ class "paircard--unmatched" ] [ span [] [ text ("Unmatched: " ++ one) ], img [ src "/sadpear.png" ] [] ]
+            div [ class "paircard--unmatched" ] [ span [] [ text ("Unmatched: " ++ one) ], img [ src "sadpear.png" ] [] ]

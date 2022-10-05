@@ -5399,7 +5399,7 @@ var $author$project$Main$pairCardItem = function (pair) {
 					$elm$html$Html$img,
 					_List_fromArray(
 						[
-							$elm$html$Html$Attributes$src('/sadpear.png')
+							$elm$html$Html$Attributes$src('sadpear.png')
 						]),
 					_List_Nil)
 				]));
@@ -5454,7 +5454,7 @@ var $author$project$Main$view = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$text('Enter things to pair')
+								$elm$html$Html$text('List things to pair')
 							])),
 						A2(
 						$elm$html$Html$textarea,
