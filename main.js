@@ -5850,7 +5850,27 @@ var $author$project$Main$pairCardItem = function (pair) {
 				]),
 			_List_fromArray(
 				[
-					$elm$html$Html$text(one + (' ' + two))
+					A2(
+					$elm$html$Html$span,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$text(one)
+						])),
+					A2(
+					$elm$html$Html$span,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$text('&')
+						])),
+					A2(
+					$elm$html$Html$span,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$text(two)
+						]))
 				]));
 	} else {
 		var one = pair.a;

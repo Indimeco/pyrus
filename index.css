@@ -15,7 +15,7 @@
 
 .hero {
     object-fit: cover;
-    width: 100vw;
+    width: 100%;
     height: var(--hero-offset);
     position: absolute;
     top: 0;
@@ -24,12 +24,12 @@
 }
 
 .footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     padding: 4px;
     background-color: var(--pear-seed);
-    width: 100vw;
+    width: 100%;
     text-align: right;
 }
 
@@ -55,12 +55,12 @@
 body {
     font-family: var(--font-family-important);
     font-size: var(--font-size-large);
-    margin: var(--hero-offset) 160px 0 160px;
     color: var(--pear-seed);
     background-color: var(--pear-flesh);
 }
 
 .main {
+    margin: var(--hero-offset) 160px 64px 160px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -136,6 +136,7 @@ button:focus {
 
 .section__pairs__cards {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .paircard {
@@ -159,8 +160,9 @@ button:focus {
     box-shadow: inset -8px -16px var(--pear-skin);
     position: absolute;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: end;
+    justify-content: center;
 }
 
 .paircard--matched:after {

@@ -108,7 +108,11 @@ pairCardItem : Pairing -> Html msg
 pairCardItem pair =
     case pair of
         Pair one two ->
-            div [ class "paircard--matched" ] [ text (one ++ " " ++ two) ]
+            div [ class "paircard--matched" ]
+                [ span [] [ text one ]
+                , span [] [ text "&" ]
+                , span [] [ text two ]
+                ]
 
         Unmatched one ->
             div [ class "paircard--unmatched" ] [ span [] [ text ("Unmatched: " ++ one) ], img [ src "sadpear.png" ] [] ]
