@@ -25,14 +25,29 @@ toPairs input =
             []
 
 
-fromString : String -> List Pairing
+fromString : String -> List String
 fromString =
-    String.split "\n" >> List.map String.trim >> List.filter (not << String.isEmpty) >> toPairs
+    String.split "\n" >> List.map String.trim >> List.filter (not << String.isEmpty)
 
 
 shuffle : Random.Seed -> List a -> List a
 shuffle seed list =
     shuffleListHelper seed list []
+
+
+removeAtIndex : Int -> List a -> List a
+removeAtIndex index list =
+    let
+        arr =
+            Array.fromList list
+
+        firstSlice =
+            Array.slice 0 index arr
+
+        secondSlice =
+            Array.slice (index + 1) (List.length list + 1) arr
+    in
+    Array.toList firstSlice ++ Array.toList secondSlice
 
 
 shuffleListHelper : Random.Seed -> List a -> List a -> List a
@@ -46,20 +61,14 @@ shuffleListHelper seed source result =
             indexGenerator =
                 Random.int 0 (List.length source - 1)
 
-            ( index, nextSeed ) =
+            ( randomIndex, nextSeed ) =
                 Random.step indexGenerator seed
 
             valAtIndex =
-                Array.fromList source |> Array.get index
-
-            firstSlice =
-                Array.fromList source |> Array.slice 0 index
-
-            secondSlice =
-                Array.fromList source |> Array.slice (index + 1) (List.length source + 1)
+                Array.fromList source |> Array.get randomIndex
 
             sourceWithoutIndex =
-                Array.toList firstSlice ++ Array.toList secondSlice
+                removeAtIndex randomIndex source
         in
         case valAtIndex of
             Just val ->

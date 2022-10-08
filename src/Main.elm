@@ -4,7 +4,8 @@ import Browser
 import Html exposing (Html, a, button, div, h1, h2, img, label, section, span, text, textarea)
 import Html.Attributes exposing (class, href, placeholder, src)
 import Html.Events exposing (onClick, onInput)
-import Pairs exposing (Pairing(..), fromString)
+import Pairs exposing (Pairing(..), fromString, shuffle, toPairs)
+import Random
 
 
 type Msg
@@ -15,36 +16,53 @@ type Msg
 type alias Model =
     { input : String
     , pairs : List Pairing
+    , seed : Random.Seed
     }
 
 
-main : Program () Model Msg
+main : Program Int Model Msg
 main =
-    Browser.sandbox
-        { init =
-            { input = ""
-            , pairs = []
-            }
+    Browser.element
+        { init = init
         , update = update
         , view = view
+        , subscriptions = subscriptions
         }
 
 
-update : Msg -> Model -> Model
+init currentTime =
+    ( { input = ""
+      , pairs = []
+      , seed = Random.initialSeed currentTime
+      }
+    , Cmd.none
+    )
+
+
+update : Msg -> Model -> ( Model, Cmd msg )
 update msg model =
     case msg of
         Input s ->
-            { model
+            ( { model
                 | input = s
-            }
+              }
+            , Cmd.none
+            )
 
         GeneratePairs ->
-            { model
-                | pairs = fromString model.input
-            }
+            ( { model
+                | pairs = shuffle model.seed (fromString model.input) |> toPairs
+                , seed = Random.step (Random.int Random.minInt Random.maxInt) model.seed |> (\( _, newSeed ) -> newSeed)
+              }
+            , Cmd.none
+            )
 
 
-view : Model -> Html Msg
+subscriptions : Model -> Sub Msg
+subscriptions _ =
+    Sub.none
+
+
 view model =
     let
         headerText =

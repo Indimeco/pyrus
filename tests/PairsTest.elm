@@ -34,13 +34,19 @@ suite =
         , describe "fromString"
             [ test "makes pairs given a string" <|
                 \_ ->
-                    Expect.equal [ Pair "Jack" "Jill" ] <| Pairs.fromString "Jack\nJill"
+                    Pairs.fromString "Jack\nJill"
+                        |> Pairs.toPairs
+                        |> Expect.equal [ Pair "Jack" "Jill" ]
             , test "makes pairs given a complex string" <|
                 \_ ->
-                    Expect.equal [ Pair "Jack" "Jill", Pair "Sam" "Frodo", Unmatched "Gandalf" ] <| Pairs.fromString "Jack\nJill\nSam\nFrodo\nGandalf"
+                    Pairs.fromString "Jack\nJill\nSam\nFrodo\nGandalf"
+                        |> Pairs.toPairs
+                        |> Expect.equal [ Pair "Jack" "Jill", Pair "Sam" "Frodo", Unmatched "Gandalf" ]
             , test "makes pairs given a string with bad formatting" <|
                 \_ ->
-                    Expect.equal [ Pair "Jack" "Jill", Pair "Sam" "Frodo", Unmatched "Gandalf" ] <| Pairs.fromString "Jack\n\n\nJill\nSam \n    Frodo\nGandalf     "
+                    Pairs.fromString "Jack\n\n\nJill\nSam \n    Frodo\nGandalf     "
+                        |> Pairs.toPairs
+                        |> Expect.equal [ Pair "Jack" "Jill", Pair "Sam" "Frodo", Unmatched "Gandalf" ]
             ]
         , describe "shuffle"
             [ test "does nothing to an empty list" <|
