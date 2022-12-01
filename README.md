@@ -1,6 +1,6 @@
 # Pyrus
 
-🍐https://indimeco.github.io/pyrus🍐
+[🍐https://indimeco.github.io/pyrus🍐](https://indimeco.github.io/pyrus)
 
 Pair things together!
 
